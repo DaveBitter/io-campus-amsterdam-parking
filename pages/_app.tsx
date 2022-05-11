@@ -1,33 +1,35 @@
 // Libs
-import React from 'react';
+import React from "react";
 
 // Utils
-import meta from '../meta.config.js';
+import meta from "../meta.config.js";
 
 // Resources
-import '../src/styles/all.scss';
+import "../src/styles/all.scss";
 
 // Components
-import SiteMeta from '../src/components/Site/SiteMeta/SiteMeta';
-import useServiceWorker from '../src/static/js/utils/hooks/useServiceWorker';
+import SiteMeta from "../src/components/Site/SiteMeta/SiteMeta";
+import useServiceWorker from "../src/static/js/utils/hooks/useServiceWorker";
 
 // Interface
 interface IProps {
-    Component: any,
-    pageProps: any
+  Component: any;
+  pageProps: any;
 }
 
 // Component
 const App = ({ Component, pageProps }: IProps) => {
-    useServiceWorker();
+  useServiceWorker();
 
-    return <>
-        <SiteMeta {...meta} />
+  return (
+    <>
+      <SiteMeta {...meta} />
 
-        <main>
-            <Component {...pageProps} />
-        </main>
+      <main>
+        <Component {...pageProps} />
+      </main>
     </>
+  );
 };
 
 // Props

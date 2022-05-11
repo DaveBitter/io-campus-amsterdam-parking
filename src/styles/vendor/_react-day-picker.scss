@@ -1,0 +1,30 @@
+@import "~react-day-picker/dist/style.css";
+
+.rdp {
+    margin: $spacing-med auto;
+
+    * {
+        color: $color-white;
+    }
+
+    &-caption_label {
+        padding-left: 0;
+    }
+
+    &-day_selected:not([disabled]) {
+        background: $gradient-primary !important;
+
+        &:focus {
+            border-color: $color-white;
+        }
+    }
+
+    &-button:hover:not([disabled]):not(.rdp-day_selected) {
+        color: $color-primary;
+        background: darken($color-primary, 35%) !important;
+    }
+
+    &-button:focus:not([disabled]):not(.rdp-day_selected) {
+        border-color: $color-white;
+    }
+}

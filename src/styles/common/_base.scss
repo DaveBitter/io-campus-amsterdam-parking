@@ -1,26 +1,58 @@
 html {
-    overflow-x: hidden;
+  overflow-x: hidden;
+}
+
+* {
+  accent-color: $color-primary;
 }
 
 body,
 #__next {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 body {
-    -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  background: $gradient-dark;
+}
+
+main {
+  position: relative;
+  padding: $spacing-sml;
+
+  @include mq($mq-tab--sml) {
+    margin-top: $spacing-lrg;
+  }
+
+  > h1,
+  > p {
+    text-align: center;
+  }
 }
 
 img {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 svg {
-    width: $spacing-med;
+  width: $spacing-med;
+}
+
+a {
+  color: $color-primary;
+}
+
+ol {
+  list-style-type: disc;
+  padding-left: $spacing-sml;
+
+  &.list-unstyled {
+    padding-left: 0;
+    list-style-type: none;
+  }
 }
 
 /*
@@ -28,5 +60,100 @@ svg {
     but it will still show up on keyboard focus.
 */
 .js-focus-visible :focus:not(.focus-visible) {
-    outline: none;
+  outline: none;
+}
+
+.form {
+  display: inline-flex;
+  flex-direction: column;
+  gap: $spacing-med;
+  margin-top: $spacing-med;
+
+  @include mq($mq-tab--sml) {
+    flex-direction: row;
+    margin-top: $spacing-lrg;
+  }
+
+  &__fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-med;
+    padding: 0;
+    border: none;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  &__input {
+    padding: $spacing-xs $spacing-sml;
+    border: none;
+    border-radius: $border-radius-lrg;
+    background-color: darken($color-gray, 38%);
+  }
+
+  &__output {
+    padding: $spacing-lrg;
+    border-radius: $border-radius-lrg;
+    background-color: darken($color-gray, 38%);
+  }
+
+  &__radio-group {
+    display: flex;
+    gap: $spacing-xs;
+    margin: $spacing-xxs 0 $spacing-sml;
+  }
+
+  &__radio-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xxs;
+  }
+}
+
+.clipboard {
+  position: relative;
+  position: absolute;
+  right: $spacing-med;
+  bottom: $spacing-med;
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    padding: $spacing-xs;
+    border-radius: $border-radius-lrg;
+    font-weight: $font-weight-bold;
+    box-shadow: $box-shadow-default--soft;
+    border: none;
+    color: $color-white;
+    background: $gradient-primary;
+    cursor: pointer;
+
+    svg {
+      width: $spacing-sml;
+      margin-left: $spacing-xs;
+      fill: $color-white;
+    }
+  }
+
+  &__feedback {
+    @include text-xs;
+    position: absolute;
+    top: -$spacing-xs;
+    left: 50%;
+    transform: translate(-50%, -100%) scale(0);
+    padding: $spacing-xs $spacing-sml;
+    white-space: nowrap;
+    border-radius: $border-radius-med;
+    color: $color-white;
+    background-color: $color-gray-darkest;
+    transition: transform $transition-timing-fast $transition-easing-cubic;
+
+    &[data-active="true"] {
+      transform: translate(-50%, -100%) scale(1);
+    }
+  }
 }
