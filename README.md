@@ -1,5 +1,7 @@
 # iO Amsterdam Campus Parking
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b69b4026-cd7d-47c5-bf2d-2d374391914d/deploy-status)](https://app.netlify.com/sites/io-campus-amsterdam-parking/deploys)
+
 ## Getting started
 
 iO Amsterdam Campus Parking was bootstrapped with Next.js. Please, read the docs to get up to speed with how pages, routing, server-side functions and more works.
