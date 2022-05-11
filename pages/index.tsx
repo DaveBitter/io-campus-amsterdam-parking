@@ -35,7 +35,7 @@ const getFormattedSelectedPartsOfDayString = (
   selectedPartsOfDay[key]?.evening && list.push("evening");
 
   // @ts-ignore
-  return new Intl.ListFormat("en", {
+  return new Intl.ListFormat("nl", {
     style: "long",
     type: "conjunction",
   }).format(list);
@@ -150,11 +150,13 @@ const Home = () => {
             {selectedDays?.map((selectedDay: Date, index) => (
               <li key={selectedDay.toString()}>
                 {new Intl.DateTimeFormat("en", {
-                  day: "numeric",
                   weekday: "long",
+                }).format(selectedDay)}{" "}
+                {new Intl.DateTimeFormat("nl", {
+                  day: "numeric",
                   month: "numeric",
                   year: "numeric",
-                }).format(selectedDay)}
+                }).format(selectedDay)}{" "}
                 <div className="form__radio-group">
                   <div className="form__radio-item">
                     <input
@@ -213,7 +215,7 @@ const Home = () => {
           </ol>
         </fieldset>
         <output className="form__output copy--large" ref={outputRef}>
-          Hi Office iO Campus Amsterdam,
+          Hi Office,
           <br />
           <br />I would love to reserve a parking spot for the following days at
           the iO Campus Amsterdam:
@@ -224,8 +226,10 @@ const Home = () => {
               <Fragment key={selectedDay.toString()}>
                 -{" "}
                 {new Intl.DateTimeFormat("en", {
-                  day: "numeric",
                   weekday: "long",
+                }).format(selectedDay)}{" "}
+                {new Intl.DateTimeFormat("nl", {
+                  day: "numeric",
                   month: "numeric",
                   year: "numeric",
                 }).format(selectedDay)}{" "}
