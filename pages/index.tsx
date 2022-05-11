@@ -88,6 +88,12 @@ const Home = () => {
     }
   };
 
+  const [mailtoBody, setMailtoBody] = useState<string | null>(null);
+  useEffect(() => {
+    outputRef?.current?.innerHTML &&
+      setMailtoBody(replaceAll(outputRef.current?.innerHTML, "<br>", "%0D%0A"));
+  }, [name, licensePlate, selectedDays]);
+
   return (
     <main>
       <h1 className="text-colored">iO Amsterdam Campus Parking</h1>
@@ -250,9 +256,7 @@ const Home = () => {
       <div className="actions">
         <a
           className="mailto-link"
-          href={`mailto:office.amsterdam@iodigital.com?subject=Parking spot reservation request ${name} (${licensePlate})&body=${outputRef
-            ?.current?.innerHTML &&
-            replaceAll(outputRef.current?.innerHTML, "<br>", "%0D%0A")}`}
+          href={`mailto:office.amsterdam@iodigital.com?subject=Parking spot reservation request ${name} (${licensePlate})&body=${mailtoBody}`}
         >
           email
           <EmailIcon />
