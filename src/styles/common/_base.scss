@@ -114,12 +114,15 @@ ol {
   }
 }
 
-.clipboard {
-  position: relative;
+.actions {
   position: absolute;
   right: $spacing-med;
   bottom: $spacing-med;
+  display: flex;
+  gap: $spacing-sml;
+}
 
+.clipboard {
   &__trigger {
     display: flex;
     align-items: center;
@@ -156,4 +159,8 @@ ol {
       transform: translate(-50%, -100%) scale(1);
     }
   }
+}
+
+.mailto-link {
+  @extend .clipboard__trigger;
 }

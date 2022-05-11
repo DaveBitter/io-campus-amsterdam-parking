@@ -1,8 +1,9 @@
 export default {
   title: "iO Amsterdam Campus Parking",
-  description: "An opinionated Next.js boilerplate",
+  description:
+    "Easily create an email template to let office.amsterdam@iodigital.com know that you want to reserve a parking spot",
   image: null,
-  themeColor: "#ffffff",
+  themeColor: "#ff5420",
   locale: "en",
   author: "iO Amsterdam Campus Parking",
   twitterHandle: null,

@@ -1,7 +1,7 @@
 {
   "name": "io-campus-amsterdam-parking",
   "version": "1.0.0",
-  "description": "An opinionated Next.js boilerplate",
+  "description": "Easily create an email template to let office.amsterdam@iodigital.com know that you want to reserve a parking spot",
   "private": false,
   "repository": {
     "type": "git",

@@ -6,6 +6,7 @@ import { DayPicker } from "react-day-picker";
 
 // Resources
 import CopyIcon from "../src/static/img/icons/copy.svg";
+import EmailIcon from "../src/static/img/icons/email.svg";
 
 // Components
 
@@ -49,6 +50,14 @@ function copyToClip(str: string) {
   document.addEventListener("copy", listener);
   document.execCommand("copy");
   document.removeEventListener("copy", listener);
+}
+
+function escapeRegExp(string: string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
+}
+
+function replaceAll(str: string, find: string, replace: string) {
+  return str.replace(new RegExp(escapeRegExp(find), "g"), replace);
 }
 
 const Home = () => {
@@ -238,21 +247,32 @@ const Home = () => {
         </output>
       </form>
 
-      <div className="clipboard">
-        <button
-          className="clipboard__trigger"
-          onClick={() => triggerCopyToClipboard()}
+      <div className="actions">
+        <a
+          className="mailto-link"
+          href={`mailto:office.amsterdam@iodigital.com?subject=Parking spot reservation request ${name} (${licensePlate})&body=${outputRef
+            ?.current?.innerHTML &&
+            replaceAll(outputRef.current?.innerHTML, "<br>", "%0D%0A")}`}
         >
-          copy
-          <CopyIcon />
-        </button>
-        <span
-          className="clipboard__feedback"
-          data-active={showCopiedFeedback}
-          ref={copiedFeedbackRef}
-        >
-          copied to clipboard!
-        </span>
+          email
+          <EmailIcon />
+        </a>
+        <div className="clipboard">
+          <button
+            className="clipboard__trigger"
+            onClick={() => triggerCopyToClipboard()}
+          >
+            copy
+            <CopyIcon />
+          </button>
+          <span
+            className="clipboard__feedback"
+            data-active={showCopiedFeedback}
+            ref={copiedFeedbackRef}
+          >
+            copied to clipboard!
+          </span>
+        </div>
       </div>
     </main>
   );
