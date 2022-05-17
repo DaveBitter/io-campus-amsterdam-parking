@@ -95,194 +95,209 @@ const Home = () => {
   }, [name, licensePlate, selectedDays]);
 
   return (
-    <main>
-      <h1 className="text-colored">iO Amsterdam Campus Parking</h1>
-      <p className="copy--large">
-        Easily create an email template to let{" "}
-        <a href="mailto:office.amsterdam@iodigital.com">
-          office.amsterdam@iodigital.com
-        </a>{" "}
-        know that you want to reserve a parking spot.
-      </p>
+    <>
+      <main>
+        <h1 className="text-colored">iO Amsterdam Campus Parking</h1>
+        <p className="copy--large">
+          Easily create an email template to let{" "}
+          <a href="mailto:office.amsterdam@iodigital.com">
+            office.amsterdam@iodigital.com
+          </a>{" "}
+          know that you want to reserve a parking spot.
+        </p>
 
-      <form className="form" onSubmit={(e) => e.preventDefault()}>
-        <fieldset className="form__fieldset">
-          <div className="form__item">
-            <label className="form__label" htmlFor="name">
-              Name
-            </label>
-            <input
-              id="name"
-              className="form__input"
-              type="text"
-              name="name"
-              value={name || ""}
-              onChange={({ target }) => setName(target.value)}
-              required
-            />
-          </div>
-          <div className="form__item">
-            <label className="form__label" htmlFor="license-plate">
-              License plate
-            </label>
-            <input
-              id="license-plate"
-              className="form__input"
-              type="text"
-              name="license-plate"
-              value={licensePlate || ""}
-              onChange={({ target }) => setLicensePlate(target.value)}
-              required
-            />
-          </div>
-          <div className="form__item">
-            <DayPicker
-              mode="multiple"
-              weekStartsOn={1}
-              defaultMonth={today}
-              selected={selectedDays}
-              onSelect={(date) => setSelectedDays(date)}
-              disabled={disabledDays}
-            />
-          </div>
+        <form className="form" onSubmit={(e) => e.preventDefault()}>
+          <fieldset className="form__fieldset">
+            <div className="form__item">
+              <label className="form__label" htmlFor="name">
+                Name
+              </label>
+              <input
+                id="name"
+                className="form__input"
+                type="text"
+                name="name"
+                value={name || ""}
+                onChange={({ target }) => setName(target.value)}
+                required
+              />
+            </div>
+            <div className="form__item">
+              <label className="form__label" htmlFor="license-plate">
+                License plate
+              </label>
+              <input
+                id="license-plate"
+                className="form__input"
+                type="text"
+                name="license-plate"
+                value={licensePlate || ""}
+                onChange={({ target }) => setLicensePlate(target.value)}
+                required
+              />
+            </div>
+            <div className="form__item">
+              <DayPicker
+                mode="multiple"
+                weekStartsOn={1}
+                defaultMonth={today}
+                selected={selectedDays}
+                onSelect={(date) => setSelectedDays(date)}
+                disabled={disabledDays}
+              />
+            </div>
 
-          <ol className="list-unstyled">
-            {selectedDays?.map((selectedDay: Date, index) => (
-              <li key={selectedDay.toString()}>
-                {new Intl.DateTimeFormat("en", {
-                  weekday: "long",
-                }).format(selectedDay)}{" "}
-                {new Intl.DateTimeFormat("nl", {
-                  day: "numeric",
-                  month: "numeric",
-                  year: "numeric",
-                }).format(selectedDay)}{" "}
-                <div className="form__radio-group">
-                  <div className="form__radio-item">
-                    <input
-                      id={`day-${index}`}
-                      className="form__radio-input"
-                      type="checkbox"
-                      onChange={({ target }) =>
-                        setSelectedPartsOfDay({
-                          ...selectedPartsOfDay,
-                          [selectedDay.toString()]: {
-                            day: target.checked,
-                            evening:
-                              selectedPartsOfDay[selectedDay.toString()]
-                                ?.evening || false,
-                          },
-                        })
-                      }
-                      name={`part-of-day-${index}`}
-                      defaultChecked
-                    />
-                    <label
-                      htmlFor={`day-${index}`}
-                      className="form__radio-labe"
-                    >
-                      day
-                    </label>
+            <ol className="list-desk list-unstyled">
+              {selectedDays?.map((selectedDay: Date, index) => (
+                <li key={selectedDay.toString()}>
+                  {new Intl.DateTimeFormat("en", {
+                    weekday: "long",
+                  }).format(selectedDay)}{" "}
+                  {new Intl.DateTimeFormat("nl", {
+                    day: "numeric",
+                    month: "numeric",
+                    year: "numeric",
+                  }).format(selectedDay)}{" "}
+                  <div className="form__radio-group">
+                    <div className="form__radio-item">
+                      <input
+                        id={`day-${index}`}
+                        className="form__radio-input"
+                        type="checkbox"
+                        onChange={({ target }) =>
+                          setSelectedPartsOfDay({
+                            ...selectedPartsOfDay,
+                            [selectedDay.toString()]: {
+                              day: target.checked,
+                              evening:
+                                selectedPartsOfDay[selectedDay.toString()]
+                                  ?.evening || false,
+                            },
+                          })
+                        }
+                        name={`part-of-day-${index}`}
+                        defaultChecked
+                      />
+                      <label
+                        htmlFor={`day-${index}`}
+                        className="form__radio-labe"
+                      >
+                        day
+                      </label>
+                    </div>
+                    <div className="form__radio-item">
+                      <input
+                        id={`evening-${index}`}
+                        className="form__radio-input"
+                        type="checkbox"
+                        onChange={({ target }) =>
+                          setSelectedPartsOfDay({
+                            ...selectedPartsOfDay,
+                            [selectedDay.toString()]: {
+                              day:
+                                selectedPartsOfDay[selectedDay.toString()]
+                                  ?.day || false,
+                              evening: target.checked,
+                            },
+                          })
+                        }
+                        name={`part-of-day-${index}`}
+                      />
+                      <label
+                        htmlFor={`evening-${index}`}
+                        className="form__radio-labe"
+                      >
+                        evening
+                      </label>
+                    </div>
                   </div>
-                  <div className="form__radio-item">
-                    <input
-                      id={`evening-${index}`}
-                      className="form__radio-input"
-                      type="checkbox"
-                      onChange={({ target }) =>
-                        setSelectedPartsOfDay({
-                          ...selectedPartsOfDay,
-                          [selectedDay.toString()]: {
-                            day:
-                              selectedPartsOfDay[selectedDay.toString()]?.day ||
-                              false,
-                            evening: target.checked,
-                          },
-                        })
-                      }
-                      name={`part-of-day-${index}`}
-                    />
-                    <label
-                      htmlFor={`evening-${index}`}
-                      className="form__radio-labe"
-                    >
-                      evening
-                    </label>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </fieldset>
-        <output className="form__output copy--large" ref={outputRef}>
-          Hi Office,
-          <br />
-          <br />I would love to reserve a parking spot for the following days at
-          the iO Campus Amsterdam:
-          <br />
-          <br />
-          {selectedDays ? (
-            selectedDays.map((selectedDay: Date) => (
-              <Fragment key={selectedDay.toString()}>
-                -{" "}
-                {new Intl.DateTimeFormat("en", {
-                  weekday: "long",
-                }).format(selectedDay)}{" "}
-                {new Intl.DateTimeFormat("nl", {
-                  day: "numeric",
-                  month: "numeric",
-                  year: "numeric",
-                }).format(selectedDay)}{" "}
-                for the{" "}
-                {getFormattedSelectedPartsOfDayString(
-                  selectedDay.toString(),
-                  selectedPartsOfDay
-                )}
-                <br />
-              </Fragment>
-            ))
-          ) : (
-            <>
-              <pre>No days selected</pre>
-            </>
-          )}
-          <br />
-          My license plate is: {licensePlate}
-          <br />
-          <br />
-          Kind regards,
-          <br />
-          <br />
-          {name}
-        </output>
-      </form>
+                </li>
+              ))}
+            </ol>
+          </fieldset>
+          <output className="form__output copy--large" ref={outputRef}>
+            Hi Office,
+            <br />
+            <br />I would love to reserve a parking spot for the following days
+            at the iO Campus Amsterdam:
+            <br />
+            <br />
+            {selectedDays ? (
+              selectedDays.map((selectedDay: Date) => (
+                <Fragment key={selectedDay.toString()}>
+                  -{" "}
+                  {new Intl.DateTimeFormat("en", {
+                    weekday: "long",
+                  }).format(selectedDay)}{" "}
+                  {new Intl.DateTimeFormat("nl", {
+                    day: "numeric",
+                    month: "numeric",
+                    year: "numeric",
+                  }).format(selectedDay)}{" "}
+                  for the{" "}
+                  {getFormattedSelectedPartsOfDayString(
+                    selectedDay.toString(),
+                    selectedPartsOfDay
+                  )}
+                  <br />
+                </Fragment>
+              ))
+            ) : (
+              <>
+                <pre>No days selected</pre>
+              </>
+            )}
+            <br />
+            My license plate is: {licensePlate}
+            <br />
+            <br />
+            Kind regards,
+            <br />
+            <br />
+            {name}
+          </output>
+        </form>
 
-      <div className="actions">
-        <a
-          className="mailto-link"
-          href={`mailto:office.amsterdam@iodigital.com?subject=Parking spot reservation request ${name} (${licensePlate})&body=${mailtoBody}`}
-        >
-          email
-          <EmailIcon />
-        </a>
-        <div className="clipboard">
-          <button
-            className="clipboard__trigger"
-            onClick={() => triggerCopyToClipboard()}
+        <div className="actions">
+          <a
+            className="mailto-link"
+            href={`mailto:office.amsterdam@iodigital.com?subject=Parking spot reservation request ${name} (${licensePlate})&body=${mailtoBody}`}
           >
-            copy
-            <CopyIcon />
-          </button>
-          <span
-            className="clipboard__feedback"
-            data-active={showCopiedFeedback}
-            ref={copiedFeedbackRef}
-          >
-            copied to clipboard!
-          </span>
+            email
+            <EmailIcon />
+          </a>
+          <div className="clipboard">
+            <button
+              className="clipboard__trigger"
+              onClick={() => triggerCopyToClipboard()}
+            >
+              copy
+              <CopyIcon />
+            </button>
+            <span
+              className="clipboard__feedback"
+              data-active={showCopiedFeedback}
+              ref={copiedFeedbackRef}
+            >
+              copied to clipboard!
+            </span>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+      <footer>
+        <h2 className="text-colored">How does it work?</h2>
+        <ol>
+          <li>
+            Reserve a parking spot by sending an email to{" "}
+            <a href="mailto:office.amsterdam@iodigital.com">
+              office.amsterdam@iodigital.com
+            </a>
+          </li>
+          <li>Get a ticket at the barrier upon arrival</li>
+          <li>Before you leave, validate your ticket at the front desk</li>
+        </ol>
+      </footer>
+    </>
   );
 };
 
