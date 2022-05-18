@@ -294,7 +294,10 @@ const Home = () => {
             </a>
           </li>
           <li>Get a ticket at the barrier upon arrival</li>
-          <li>Before you leave, validate your ticket at the front desk</li>
+          <li>
+            Right Before you leave, validate your ticket at the front desk (it
+            is time-bound)
+          </li>
         </ol>
       </footer>
     </>
