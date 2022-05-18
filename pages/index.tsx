@@ -35,7 +35,7 @@ const getFormattedSelectedPartsOfDayString = (
   selectedPartsOfDay[key]?.evening && list.push("evening");
 
   // @ts-ignore
-  return new Intl.ListFormat("nl", {
+  return new Intl.ListFormat("en", {
     style: "long",
     type: "conjunction",
   }).format(list);
@@ -68,13 +68,14 @@ const Home = () => {
   const [showCopiedFeedback, setShowCopiedFeedback] = useState(false);
 
   useEffect(() => {
-    name
-      ? window.localStorage.setItem("name", name)
-      : setName(window.localStorage.getItem("name") || null);
-    licensePlate
-      ? window.localStorage.setItem("licensePlate", licensePlate)
-      : setLicensePlate(window.localStorage.getItem("licensePlate") || null);
+    name && window.localStorage.setItem("name", name);
+    licensePlate && window.localStorage.setItem("licensePlate", licensePlate);
   }, [name, licensePlate]);
+
+  useEffect(() => {
+    setName(window.localStorage.getItem("name") || null);
+    setLicensePlate(window.localStorage.getItem("licensePlate") || null);
+  }, []);
 
   const outputRef = useRef<HTMLHtmlElement>(null);
   const copiedFeedbackRef = useRef<HTMLHtmlElement>(null);
