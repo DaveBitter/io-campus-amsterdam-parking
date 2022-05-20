@@ -294,10 +294,10 @@ const Home = () => {
               office.amsterdam@iodigital.com
             </a>
           </li>
-          <li>Get a ticket at the barrier upon arrival</li>
+          <li>{`If the barrier doesn't upon arrival, get a ticket at the barrier`}</li>
           <li>
-            Right Before you leave, validate your ticket at the front desk (it
-            is time-bound)
+            If you have a ticket, validate your ticket at the front desk right
+            before you leave (it is time-bound)
           </li>
         </ol>
       </footer>
