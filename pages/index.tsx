@@ -141,7 +141,6 @@ const Home = () => {
               <DayPicker
                 mode="multiple"
                 weekStartsOn={1}
-                defaultMonth={today}
                 selected={selectedDays}
                 onSelect={(date) => setSelectedDays(date)}
                 disabled={disabledDays}
