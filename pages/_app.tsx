@@ -1,8 +1,10 @@
 // Libs
-import React from "react";
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
 
 // Utils
 import meta from "../meta.config.js";
+import { initGA, logPageView } from "../src/static/js/utils/googleAnalytics";
 
 // Resources
 import "../src/styles/all.scss";
@@ -20,6 +22,19 @@ interface IProps {
 // Component
 const App = ({ Component, pageProps }: IProps) => {
   useServiceWorker();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (process.env.NODE_ENV === "development") {
+      return;
+    }
+
+    if (!window.GA_INITIALIZED) {
+      initGA();
+      window.GA_INITIALIZED = true;
+    }
+    logPageView();
+  }, [router.route]);
 
   return (
     <>

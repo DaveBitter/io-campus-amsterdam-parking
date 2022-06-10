@@ -1,23 +1,14 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "lib": [
-      "es5",
-      "es6",
-      "es7",
-      "es2017",
-      "dom"
-    ],
+    "lib": ["es5", "es6", "es7", "es2017", "dom"],
     "sourceMap": true,
     "allowJs": false,
     "jsx": "preserve",
     "module": "esnext",
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "rootDirs": [
-      "src",
-      "stories"
-    ],
+    "rootDirs": ["src", "stories"],
     "baseUrl": "src",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
@@ -36,14 +27,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": [
-    "pages/**/*",
-    "src/**/*",
-    "custom.d.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "build",
-    "scripts"
-  ]
+  "include": ["pages/**/*", "src/**/*", "custom.d.ts", "global.d.ts"],
+  "exclude": ["node_modules", "build", "scripts"]
 }
