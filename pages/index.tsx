@@ -18,12 +18,6 @@ const getEndOfNextWeek = (date: Date) => {
   return new Date(date.setDate(lastday));
 };
 
-const today = new Date();
-const disabledDays = [
-  { before: new Date() },
-  { after: getEndOfNextWeek(today) },
-];
-
 const getFormattedSelectedPartsOfDayString = (
   key: string,
   selectedPartsOfDay: any
@@ -61,6 +55,12 @@ function replaceAll(str: string, find: string, replace: string) {
 }
 
 const Home = () => {
+  const today = new Date();
+  const disabledDays = [
+    { before: new Date() },
+    { after: getEndOfNextWeek(today) },
+  ];
+
   const [name, setName] = useState<string | null>(null);
   const [licensePlate, setLicensePlate] = useState<string | null>(null);
   const [selectedDays, setSelectedDays] = React.useState<Date[]>();
