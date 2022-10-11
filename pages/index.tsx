@@ -55,11 +55,17 @@ function replaceAll(str: string, find: string, replace: string) {
 }
 
 const Home = () => {
-  const today = new Date();
-  const disabledDays = [
-    { before: new Date() },
-    { after: getEndOfNextWeek(today) },
-  ];
+  const [disabledDays, setDisabledDays] = useState<
+    [{ before: Date }, { after: Date }] | null
+  >(null);
+
+  useEffect(() => {
+    const today = new Date();
+    setDisabledDays([
+      { before: new Date() },
+      { after: getEndOfNextWeek(today) },
+    ]);
+  }, []);
 
   const [name, setName] = useState<string | null>(null);
   const [licensePlate, setLicensePlate] = useState<string | null>(null);
@@ -138,13 +144,15 @@ const Home = () => {
               />
             </div>
             <div className="form__item">
-              <DayPicker
-                mode="multiple"
-                weekStartsOn={1}
-                selected={selectedDays}
-                onSelect={(date) => setSelectedDays(date)}
-                disabled={disabledDays}
-              />
+              {disabledDays && (
+                <DayPicker
+                  mode="multiple"
+                  weekStartsOn={1}
+                  selected={selectedDays}
+                  onSelect={(date) => setSelectedDays(date)}
+                  disabled={disabledDays}
+                />
+              )}
             </div>
 
             <ol className="list-desk list-unstyled">
