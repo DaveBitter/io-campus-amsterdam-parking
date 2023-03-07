@@ -301,10 +301,11 @@ const Home = () => {
               office.amsterdam@iodigital.com
             </a>
           </li>
-          <li>{`If the barrier doesn't upon arrival, get a ticket at the barrier`}</li>
           <li>
-            If you have a ticket, validate your ticket at the front desk right
-            before you leave (it is time-bound)
+            If the barrier does not open upon your arrival, obtain a ticket and
+            confirm with the Office that you have been added. If you have been
+            added, press the information button when exiting and request that
+            the barrier be opened for you.
           </li>
         </ol>
       </footer>
