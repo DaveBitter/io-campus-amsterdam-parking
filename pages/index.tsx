@@ -69,6 +69,7 @@ const Home = () => {
 
   const [name, setName] = useState<string | null>(null);
   const [licensePlate, setLicensePlate] = useState<string | null>(null);
+  const [campus, setCampus] = useState<string | null>(null);
   const [selectedDays, setSelectedDays] = React.useState<Date[]>();
   const [selectedPartsOfDay, setSelectedPartsOfDay] = useState({});
   const [showCopiedFeedback, setShowCopiedFeedback] = useState(false);
@@ -76,11 +77,13 @@ const Home = () => {
   useEffect(() => {
     name && window.localStorage.setItem("name", name);
     licensePlate && window.localStorage.setItem("licensePlate", licensePlate);
-  }, [name, licensePlate]);
+    campus && window.localStorage.setItem("campus", campus);
+  }, [name, licensePlate, campus]);
 
   useEffect(() => {
     setName(window.localStorage.getItem("name") || null);
     setLicensePlate(window.localStorage.getItem("licensePlate") || null);
+    setCampus(window.localStorage.getItem("campus") || "Amsterdam");
   }, []);
 
   const outputRef = useRef<HTMLHtmlElement>(null);
@@ -97,18 +100,27 @@ const Home = () => {
 
   const [mailtoBody, setMailtoBody] = useState<string | null>(null);
   useEffect(() => {
-    outputRef?.current?.innerHTML &&
-      setMailtoBody(replaceAll(outputRef.current?.innerHTML, "<br>", "%0D%0A"));
-  }, [name, licensePlate, selectedDays]);
+    // setTimeout is needed to wait for the DOM to update
+    setTimeout(() => {
+      outputRef?.current?.innerHTML &&
+        setMailtoBody(
+          replaceAll(
+            replaceAll(outputRef.current?.innerHTML, "<br>", "%0D%0A"),
+            "<!-- -->",
+            ""
+          )
+        );
+    }, 0);
+  }, [name, licensePlate, campus, selectedDays]);
 
   return (
     <>
       <main>
-        <h1 className="text-colored">iO Amsterdam Campus Parking</h1>
+        <h1 className="text-colored">iO {campus} Campus Parking</h1>
         <p className="copy--large">
           Easily create an email template to let{" "}
-          <a href="mailto:office.amsterdam@iodigital.com">
-            office.amsterdam@iodigital.com
+          <a href={`mailto:office.${campus?.toLowerCase()}@iodigital.com`}>
+            office.{campus?.toLowerCase()}@iodigital.com
           </a>{" "}
           know that you want to reserve a parking spot.
         </p>
@@ -142,6 +154,36 @@ const Home = () => {
                 onChange={({ target }) => setLicensePlate(target.value)}
                 required
               />
+            </div>
+            <div className="form__item">
+              <div className="form__radio-container">
+                <label className="form__label" htmlFor="campus-amsterdam">
+                  Campus Amsterdam
+                </label>
+                <input
+                  id="campus-amsterdam"
+                  className="form__input"
+                  type="radio"
+                  name="campus"
+                  checked={campus === "Amsterdam"}
+                  onChange={() => setCampus("Amsterdam")}
+                  required
+                />
+              </div>
+              <div className="form__radio-container">
+                <label className="form__label" htmlFor="campus-utrecht">
+                  Campus Utrecht
+                </label>
+                <input
+                  id="campus-utrecht"
+                  className="form__input"
+                  type="radio"
+                  name="campus"
+                  checked={campus === "Utrecht"}
+                  onChange={() => setCampus("Utrecht")}
+                  required
+                />
+              </div>
             </div>
             <div className="form__item">
               {disabledDays && (
@@ -227,7 +269,7 @@ const Home = () => {
             Hi Office,
             <br />
             <br />I would love to reserve a parking spot for the following days
-            at the iO Campus Amsterdam:
+            at the iO Campus {campus}:
             <br />
             <br />
             {selectedDays ? (
@@ -269,7 +311,7 @@ const Home = () => {
         <div className="actions">
           <a
             className="mailto-link"
-            href={`mailto:office.amsterdam@iodigital.com?subject=Parking spot reservation request ${name} (${licensePlate})&body=${mailtoBody}`}
+            href={`mailto:office.${campus?.toLowerCase()}@iodigital.com?subject=Parking spot reservation request ${name} (${licensePlate})&body=${mailtoBody}`}
           >
             email
             <EmailIcon />
@@ -297,8 +339,8 @@ const Home = () => {
         <ol>
           <li>
             Reserve a parking spot by sending an email to{" "}
-            <a href="mailto:office.amsterdam@iodigital.com">
-              office.amsterdam@iodigital.com
+            <a href={`mailto:office.${campus?.toLowerCase()}@iodigital.com`}>
+              office.{campus?.toLowerCase()}@iodigital.com
             </a>
           </li>
           <li>

@@ -99,6 +99,17 @@ ol {
     gap: $spacing-xs;
   }
 
+  &__radio-container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: $spacing-xs;
+  }
+
+  &__label {
+    cursor: pointer;
+  }
+
   &__input {
     padding: $spacing-xs $spacing-sml;
     border: none;
