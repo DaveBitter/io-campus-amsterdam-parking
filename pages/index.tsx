@@ -334,23 +334,25 @@ const Home = () => {
           </div>
         </div>
       </main>
-      <footer>
-        <h2 className="text-colored">How does it work?</h2>
-        <ol>
-          <li>
-            Reserve a parking spot by sending an email to{" "}
-            <a href={`mailto:office.${campus?.toLowerCase()}@iodigital.com`}>
-              office.{campus?.toLowerCase()}@iodigital.com
-            </a>
-          </li>
-          <li>
-            If the barrier does not open upon your arrival, obtain a ticket and
-            confirm with the Office that you have been added. If you have been
-            added, press the information button when exiting and request that
-            the barrier be opened for you.
-          </li>
-        </ol>
-      </footer>
+      {campus === "Amsterdam" && (
+        <footer>
+          <h2 className="text-colored">How does it work?</h2>
+          <ol>
+            <li>
+              Reserve a parking spot by sending an email to{" "}
+              <a href={`mailto:office.${campus?.toLowerCase()}@iodigital.com`}>
+                office.{campus?.toLowerCase()}@iodigital.com
+              </a>
+            </li>
+            <li>
+              If the barrier does not open upon your arrival, obtain a ticket
+              and confirm with the Office that you have been added. If you have
+              been added, press the information button when exiting and request
+              that the barrier be opened for you.
+            </li>
+          </ol>
+        </footer>
+      )}
     </>
   );
 };
