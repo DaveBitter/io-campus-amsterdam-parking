@@ -184,6 +184,20 @@ const Home = () => {
                   required
                 />
               </div>
+              <div className="form__radio-container">
+                <label className="form__label" htmlFor="campus-rotterdam">
+                  Campus Rotterdam
+                </label>
+                <input
+                  id="campus-rotterdam"
+                  className="form__input"
+                  type="radio"
+                  name="campus"
+                  checked={campus === "Rotterdam"}
+                  onChange={() => setCampus("Rotterdam")}
+                  required
+                />
+              </div>
             </div>
             <div className="form__item">
               {disabledDays && (
