@@ -119,8 +119,18 @@ const Home = () => {
         <h1 className="text-colored">iO {campus} Campus Parking</h1>
         <p className="copy--large">
           Easily create an email template to let{" "}
-          <a href={`mailto:office.${campus?.toLowerCase()}@iodigital.com`}>
-            office.{campus?.toLowerCase()}@iodigital.com
+          <a
+            href={`mailto:office.${campus
+              ?.toLowerCase()
+              .split(" ")
+              .join("")}@iodigital.com`}
+          >
+            office.
+            {campus
+              ?.toLowerCase()
+              .split(" ")
+              .join("")}
+            @iodigital.com
           </a>{" "}
           know that you want to reserve a parking spot.
         </p>
@@ -171,16 +181,16 @@ const Home = () => {
                 />
               </div>
               <div className="form__radio-container">
-                <label className="form__label" htmlFor="campus-utrecht">
-                  Campus Utrecht
+                <label className="form__label" htmlFor="campus-den-bosch">
+                  Campus Den Bosch
                 </label>
                 <input
-                  id="campus-utrecht"
+                  id="campus-den-bosch"
                   className="form__input"
                   type="radio"
                   name="campus"
-                  checked={campus === "Utrecht"}
-                  onChange={() => setCampus("Utrecht")}
+                  checked={campus === "Den Bosch"}
+                  onChange={() => setCampus("Den Bosch")}
                   required
                 />
               </div>
@@ -195,6 +205,20 @@ const Home = () => {
                   name="campus"
                   checked={campus === "Rotterdam"}
                   onChange={() => setCampus("Rotterdam")}
+                  required
+                />
+              </div>
+              <div className="form__radio-container">
+                <label className="form__label" htmlFor="campus-utrecht">
+                  Campus Utrecht
+                </label>
+                <input
+                  id="campus-utrecht"
+                  className="form__input"
+                  type="radio"
+                  name="campus"
+                  checked={campus === "Utrecht"}
+                  onChange={() => setCampus("Utrecht")}
                   required
                 />
               </div>
@@ -325,7 +349,12 @@ const Home = () => {
         <div className="actions">
           <a
             className="mailto-link"
-            href={`mailto:office.${campus?.toLowerCase()}@iodigital.com?subject=Parking spot reservation request ${name} (${licensePlate})&body=${mailtoBody}`}
+            href={`mailto:office.${campus
+              ?.toLowerCase()
+              .split(" ")
+              .join(
+                ""
+              )}@iodigital.com?subject=Parking spot reservation request ${name} (${licensePlate})&body=${mailtoBody}`}
           >
             email
             <EmailIcon />
@@ -354,8 +383,18 @@ const Home = () => {
           <ol>
             <li>
               Reserve a parking spot by sending an email to{" "}
-              <a href={`mailto:office.${campus?.toLowerCase()}@iodigital.com`}>
-                office.{campus?.toLowerCase()}@iodigital.com
+              <a
+                href={`mailto:office.${campus
+                  ?.toLowerCase()
+                  .split(" ")
+                  .join("")}@iodigital.com`}
+              >
+                office.
+                {campus
+                  ?.toLowerCase()
+                  .split(" ")
+                  .join("")}
+                @iodigital.com
               </a>
             </li>
             <li>
